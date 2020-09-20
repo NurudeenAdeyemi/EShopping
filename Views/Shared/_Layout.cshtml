@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Vegebasket</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    @RenderSection("style", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-expand navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand text-success" asp-area="" asp-controller="Home" asp-action="Index">Vegebasket </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="#">Vege Club</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search for products..." aria-label="Search">
+                    <button class="btn bg-success btn-outline-success my-2 my-sm-0 text-white" type="submit">Search</button>
+                </form>
+                <div class="float-right">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Cart
+                                </button>
+                                <div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
+                                   
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Customer" asp-action="Login"><i class="fas fa-user"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Customer" asp-action="Create"><i class="fas fa-user"></i>Sign up</a>
+                        </li>
+                    </ul>
+                </div>
+</div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+   
+    <div class="container bg-light mb-0">
+        <div class="row">
+            <div class="col-sm-3 text-center mb-0">
+                <p class="mb-0 text-success"><h6 class="text-success">Vegebasket</h6></p>
+                <hr>
+                
+                <a class="text-dark text-underline no-wrap mb-0" target="_blank" asp-area="" asp-controller="Home" asp-action="AboutUs"><small>About us</small> </a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Latest news</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Careers</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"> <small>Our sponsorships</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Ethics and Compliance</small></a><p class="mb-0"></p>
+            </div>
+
+            <div class="col-sm-3 text-center mb-0">
+                <p class="mb-0 text-success"><h6 class="text-success">Help</h6></p>
+                <hr>
+                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>FAQs </small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Contact us</small></a><p class="mb-0"></p>
+
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <footer class="border-top footer text-muted">
+
+        <div class="container bg-success">
+            <p class="text-center text-white align-content-center">&copy; 2020 - Vegebasket - <a asp-area="" asp-controller="Home" asp-action="AboutUs">About us</a>
+</div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
