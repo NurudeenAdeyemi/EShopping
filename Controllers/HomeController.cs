@@ -41,5 +41,23 @@ namespace EShopping.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+
+        public IActionResult Search(int id, Item item)
+        {
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var itemName = _itemService.GetAll();
+                return View("SearchProduct");
+            }
+            return View(item);
+        }
+
     }
 }

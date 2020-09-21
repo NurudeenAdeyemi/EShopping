@@ -57,5 +57,10 @@ namespace EShopping.Repository
         {
             return _dbContext.Items.Any(e => e.ItemId == id);
         }
+
+        public Item Search(int id)
+        {
+            return _dbContext.Items.Find(id);
+        }
     }
 }

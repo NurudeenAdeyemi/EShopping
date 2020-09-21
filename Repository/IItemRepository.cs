@@ -14,5 +14,6 @@ namespace EShopping.Repository
         public void Delete(int id);
         public List<Item> GetAll();
         public bool Exists(int id);
+        public Item Search(int id);
     }
 }

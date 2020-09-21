@@ -398,3 +398,4 @@ C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Ord
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Order\Edit.cshtml.g.cs
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Order\Index.cshtml.g.cs
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Home\AboutUs.cshtml.g.cs
+C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Home\SearchProduct.cshtml.g.cs

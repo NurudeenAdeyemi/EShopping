@@ -6,12 +6,13 @@
     <title>@ViewData["Title"] - Vegebasket</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/fontawesome-free-5.14.0-web/css/all.css" rel="stylesheet">
 
     @RenderSection("style", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar sticky-top navbar-expand navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar sticky-top navbar-expand navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 sticky-top">
             <div class="container">
                 <a class="navbar-brand text-success" asp-area="" asp-controller="Home" asp-action="Index">Vegebasket </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -21,35 +22,36 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-success" asp-area="" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="#">Vege Club</a>
+                            <a class="nav-link text-success" asp-area="" asp-controller="Home" asp-action="#">Vege Club</a>
                         </li>
                     </ul>
 
                 </div>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search for products..." aria-label="Search">
-                    <button class="btn bg-success btn-outline-success my-2 my-sm-0 text-white" type="submit">Search</button>
+                <form class="form-inline" method="GET" asp-action="Search" asp-controller="Home">
+                    <div>
+                        <input class="form-control  mr-0" type="search" name="ItemName"  placeholder="Search for products..." aria-label="Search">
+                        <button class="btn btn-success text-white ml-0" type="submit">Search</button>
+                    </div>
                 </form>
                 <div class="float-right">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                   Cart
-                                </button>
-                                <div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
-                                   
-                                </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-success" href="#" id="navbardrop" data-toggle="dropdown">
+                                <i class="fa fa-fw fa-shopping-cart"></i>Cart
+                            </a>
+                            <div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
+                                
                             </div>
                         </li>
+                       
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Customer" asp-action="Login"><i class="fas fa-user"></i> Login</a>
+                            <a class="nav-link text-success" asp-area="" asp-controller="Customer" asp-action="Login"><i class="fas fa-user"></i> Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Customer" asp-action="Create"><i class="fas fa-user"></i>Sign up</a>
+                            <a class="nav-link text-success " asp-area="" asp-controller="Customer" asp-action="Create"><i class="fas fa-user"></i>Sign up</a>
                         </li>
                     </ul>
                 </div>

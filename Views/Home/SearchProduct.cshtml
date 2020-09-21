@@ -1,0 +1,27 @@
+﻿
+@model List<Item>
+<div class="col-sm-9">
+    <p><h6 class="font-weight-light">ALL PRODUCTS &#128526</h6></p>
+    <hr>
+    <div class="container">
+        <div class="row text-center">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-3 border active img-responsive">
+                    <a href="#" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
+                        <img src="~/images/@item.ItemPictureUrl" class="img-responsive" style="width:100%" alt="Image">
+                    </a>
+                    <p class="mb-0">@item.ItemName</p>
+                    <p>&#8358 @item.Price </p>
+                    <button type="submit" onclick="addToCart(this.id)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" class="btn btn-sm btn-outline-success font-weight-bold" style="width:70%"><span class="spinner-grow spinner-grow-sm"></span><small>ADD TO CART</small></button>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</div>
+   
+   
+    <br>
+    <br>
