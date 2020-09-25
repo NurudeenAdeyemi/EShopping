@@ -20,6 +20,6 @@ namespace EShopping.Service
 
         public bool Exists(int id);
         
-        public Customer Find(Customer customer);
+        public Customer Login(string username, string password);
     }
 }

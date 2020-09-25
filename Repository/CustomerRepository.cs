@@ -66,9 +66,9 @@ namespace EShopping.Repository
         }
 
        
-        public Customer Find(Customer customer)
+        public Customer FindByUsername(string username)
         {
-            return _dbContext.Customers.Find(customer);
+            return _dbContext.Customers.FirstOrDefault(c => c.Username == username);
         }
     }
 }

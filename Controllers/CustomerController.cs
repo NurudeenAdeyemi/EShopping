@@ -147,11 +147,11 @@ namespace EShopping.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login(Customer customer)
+        public IActionResult Login(string username, string password)
         {
 
-            var cust = _customerService.Find(customer);
-            if (cust == null)
+            var customer = _customerService.Login(username, password);
+            if (customer == null)
             {
                 ViewBag.Message = "Invalid Username/Password";
                 return View();
@@ -160,7 +160,7 @@ namespace EShopping.Controllers
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, customer.Email),
+                    new Claim(ClaimTypes.Name, customer.LastName),
                     new Claim(ClaimTypes.Email, customer.Email)
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

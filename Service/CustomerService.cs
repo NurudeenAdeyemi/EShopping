@@ -47,9 +47,15 @@ namespace EShopping.Service
             return customerRepository.Exists(id) ;
         }
 
-        public Customer Find(Customer customer)
+        public Customer Login(string username, string password)
         {
-            return customerRepository.Find(customer);
+            var user = customerRepository.FindByUsername(username);
+            if(user == null || user.Password != password)
+            {
+                return null;
+            }
+
+            return user;
         }
     }
 }

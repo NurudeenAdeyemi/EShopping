@@ -20,6 +20,6 @@ namespace EShopping.Repository
 
         public bool Exists(int id);
         
-        public Customer Find(Customer customer);
+        public Customer FindByUsername(string username);
     }
 }

@@ -52,15 +52,15 @@
                 </form>
                 <div class="float-right">
                     <ul class="navbar-nav flex-grow-1">
-                        @*<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-success" href="#" id="navbardrop" data-toggle="dropdown">
-                <i class="fa fa-fw fa-shopping-cart"></i>Cart
-            </a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-success" href="#" id="navbardrop" data-toggle="dropdown">
+                                <i class="fa fa-fw fa-shopping-cart"></i>Cart<span class="badge" id='total-quantity-label'>0</span>
+                            </a>
 
-            <div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
 
-            </div>
-        </li>*@
+                            </div>
+                         </li>
                         @if (User != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
