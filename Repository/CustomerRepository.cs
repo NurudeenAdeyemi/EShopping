@@ -1,4 +1,5 @@
 ﻿using EShopping.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,14 @@ namespace EShopping.Repository
 {
     public class CustomerRepository : ICustomerRepository
     {
+
+        MySqlConnection connection;
+
+        public CustomerRepository(MySqlConnection connection)
+        {
+            this.connection = connection;
+        }
+
         private readonly EShoppingContext _dbContext;
         public CustomerRepository(EShoppingContext dbContext)
         {
@@ -35,11 +44,9 @@ namespace EShopping.Repository
 
         public void Delete(int id)
         {
-            //var customer = FindById(id);
-            var customer = new Customer
-            {
-                CustomerId = id
-            };
+            var customer = FindById(id);
+           
+          
             if(customer != null)
             {
                 _dbContext.Customers.Remove(customer);
@@ -56,6 +63,12 @@ namespace EShopping.Repository
         public  bool Exists(int id)
         {
             return _dbContext.Customers.Any(e => e.CustomerId == id);
+        }
+
+       
+        public Customer Find(Customer customer)
+        {
+            return _dbContext.Customers.Find(customer);
         }
     }
 }

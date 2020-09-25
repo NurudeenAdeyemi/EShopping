@@ -6,7 +6,20 @@
     <title>@ViewData["Title"] - Vegebasket</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="~/css/animate.min.css" />
+    <link rel="stylesheet" href="~/css/sweetalert.min.css" />
+
     <link href="~/fontawesome-free-5.14.0-web/css/all.css" rel="stylesheet">
+
+    
 
     @RenderSection("style", required: false)
 </head>
@@ -24,38 +37,85 @@
                         <li class="nav-item">
                             <a class="nav-link text-success" asp-area="" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-success" asp-area="" asp-controller="Home" asp-action="#">Vege Club</a>
-                        </li>
+
                     </ul>
 
                 </div>
+
+
+
                 <form class="form-inline" method="GET" asp-action="Search" asp-controller="Home">
                     <div>
-                        <input class="form-control  mr-0" type="search" name="ItemName"  placeholder="Search for products..." aria-label="Search">
+                        <input class="form-control  mr-0" type="search" name="ItemName" placeholder="Search for products..." aria-label="Search">
                         <button class="btn btn-success text-white ml-0" type="submit">Search</button>
                     </div>
                 </form>
                 <div class="float-right">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-success" href="#" id="navbardrop" data-toggle="dropdown">
-                                <i class="fa fa-fw fa-shopping-cart"></i>Cart
-                            </a>
-                            <div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
-                                
-                            </div>
-                        </li>
-                       
-                        <li class="nav-item">
-                            <a class="nav-link text-success" asp-area="" asp-controller="Customer" asp-action="Login"><i class="fas fa-user"></i> Login</a>
-                        </li>
+                        @*<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-success" href="#" id="navbardrop" data-toggle="dropdown">
+                <i class="fa fa-fw fa-shopping-cart"></i>Cart
+            </a>
+
+            <div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
+
+            </div>
+        </li>*@
+                        @if (User != null && User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-success" href="#">@User.Identity.Name</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-success" asp-area="" asp-controller="Customer" asp-action="Logout"><i class="fas fa-user"></i> Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <a class="nav-link text-success" asp-area="" asp-controller="Customer" asp-action="Login"><i class="fas fa-user"></i>Login</a>
+                        }
+
+                        
                         <li class="nav-item">
                             <a class="nav-link text-success " asp-area="" asp-controller="Customer" asp-action="Create"><i class="fas fa-user"></i>Sign up</a>
                         </li>
+                        <li class="nav-item">
+                            <!-- Button trigger modal -->
+                            <a type="button" href="#" class="nav-link text-success notification" data-toggle="modal" data-target="#exampleModal" data-spy="affix" data-offset-top="10">
+                                <i class="fas fa-shopping-cart shopping-cart-icon"></i>Cart<span class="badge" id='cartItems'>0</span>
+                            </a>
+
+
+                        </li>
+
+
+
+                        @*<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-success notification" href="#" id="navbardrop" data-toggle="dropdown" data-spy="affix" data-offset-top="10">
+                <i class="fas fa-shopping-cart shopping-cart-icon"></i>Cart<span class="badge" id='cartItems'>0</span>
+            </a>
+            <div class="dropdown-menu" id='prices'></div>
+
+
+        </li>
+        <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle text-success" href="#" id="navbardrop" data-toggle="dropdown">
+                Items
+            </a>
+
+            <div class="cart col-sm-6 dropdown-menu text-sm-center font-weight-lighter " id='cart'>
+                Add fresh items to the cart
+            </div>
+
+
+         </li>*@
+
+
                     </ul>
-                </div>
-</div>
+
+            </div>
+
+            </div>
         </nav>
     </header>
     <div class="container">
@@ -63,13 +123,13 @@
             @RenderBody()
         </main>
     </div>
-   
+
     <div class="container bg-light mb-0">
         <div class="row">
             <div class="col-sm-3 text-center mb-0">
                 <p class="mb-0 text-success"><h6 class="text-success">Vegebasket</h6></p>
                 <hr>
-                
+
                 <a class="text-dark text-underline no-wrap mb-0" target="_blank" asp-area="" asp-controller="Home" asp-action="AboutUs"><small>About us</small> </a><p class="mb-0"></p>
                 <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Latest news</small></a><p class="mb-0"></p>
                 <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Careers</small></a><p class="mb-0"></p>
@@ -92,11 +152,16 @@
 
         <div class="container bg-success">
             <p class="text-center text-white align-content-center">&copy; 2020 - Vegebasket - <a asp-area="" asp-controller="Home" asp-action="AboutUs">About us</a>
-</div>
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/sweetalert.min.js"></script>
+
+    
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

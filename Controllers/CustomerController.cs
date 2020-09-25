@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using EShopping.Models;
 using EShopping.Repository;
 using EShopping.Service;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
@@ -54,9 +58,9 @@ namespace EShopping.Controllers
             if (ModelState.IsValid)
             {
                 _customerService.Create(customer);
-                return RedirectToAction(nameof(Index));
+                
             }
-            return View(customer);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -119,7 +123,54 @@ namespace EShopping.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        public IActionResult ShoppingCart()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+
+            HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult Login(Customer customer)
+        {
+
+            var cust = _customerService.Find(customer);
+            if (cust == null)
+            {
+                ViewBag.Message = "Invalid Username/Password";
+                return View();
+            }
+            else
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, customer.Email),
+                    new Claim(ClaimTypes.Email, customer.Email)
+                };
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authenticationProperties = new AuthenticationProperties();
+                var principal = new ClaimsPrincipal(claimsIdentity);
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authenticationProperties);
+                return RedirectToAction("Index", "Home");
+            }
+
+        }
     }
-    
-    
+
 }

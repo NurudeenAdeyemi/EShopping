@@ -46,5 +46,10 @@ namespace EShopping.Service
         {
             return customerRepository.Exists(id) ;
         }
+
+        public Customer Find(Customer customer)
+        {
+            return customerRepository.Find(customer);
+        }
     }
 }

@@ -19,5 +19,7 @@ namespace EShopping.Repository
         public List<Customer> GetAll();
 
         public bool Exists(int id);
+        
+        public Customer Find(Customer customer);
     }
 }

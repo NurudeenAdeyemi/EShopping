@@ -365,9 +365,6 @@ C:\Users\nurudeen\source\repos\EShopping\bin\Debug\netcoreapp3.1\refs\System.Xml
 C:\Users\nurudeen\source\repos\EShopping\bin\Debug\netcoreapp3.1\refs\WindowsBase.dll
 C:\Users\nurudeen\source\repos\EShopping\bin\Debug\netcoreapp3.1\EShopping.Views.dll
 C:\Users\nurudeen\source\repos\EShopping\bin\Debug\netcoreapp3.1\EShopping.Views.pdb
-C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.csproj.CoreCompileInputs.cache
-C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.Views.pdb
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.dll
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.pdb
@@ -399,3 +396,8 @@ C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Ord
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Order\Index.cshtml.g.cs
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Home\AboutUs.cshtml.g.cs
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Home\SearchProduct.cshtml.g.cs
+C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Customer\ShoppingCart.cshtml.g.cs
+C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.csproj.CoreCompileInputs.cache
+C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\EShopping.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Login.cshtml.g.cs

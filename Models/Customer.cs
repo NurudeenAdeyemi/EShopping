@@ -9,7 +9,7 @@ namespace EShopping.Models
 {
     public class Customer
     {
-        
+
         public int CustomerId { get; set; }
 
         [Required(ErrorMessage = "First Name is required")]
@@ -50,4 +50,5 @@ namespace EShopping.Models
 
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     }
+
 }

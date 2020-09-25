@@ -29,7 +29,8 @@ namespace EShopping.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            var items = _itemService.GetAll();
+            return View(items);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

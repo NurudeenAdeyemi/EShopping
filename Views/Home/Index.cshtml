@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Item>
-@{
-    ViewData["Title"] = "Home Page";
-}
+@{ ViewData["Title"] = "Home Page"; }
 
 @section style {
     <style>
@@ -9,6 +7,33 @@
             width: 100%; /* Set width to 100% */
             min-height: 200px;
         }
+
+        .btn-add-cart {
+            position: absolute;
+            right: 15px;
+            top: 0px;
+        }
+
+        .notification {
+            color: white;
+            text-decoration: none;
+            padding: 5px 3px;
+            position: relative;
+            display: inline-block;
+            border-radius: 2px;
+        }
+
+
+
+            .notification .badge {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                padding: 5px 10px;
+                border-radius: 50%;
+                background: red;
+                color: white;
+            }
     </style>
 
 }
@@ -16,7 +41,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        
+
 
         <div class="col-sm-12">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -96,20 +121,21 @@
 <br>
 
 <div class="text-center ">
-    <p ><h4 class="font-weight-light">Featured Products</h4></p>
+    <p><h4 class="font-weight-light">Featured Products</h4></p>
     <hr>
 </div>
 <div class="container-fluid text-center">
     <div class="row">
+
         <!-- @foreach (var item in Model)
-     {
-     <div class="col-sm-2 border">
-         <img src="~/images/@item.ItemPictureUrl" class="img-responsive" style="width:100%" alt="Image">
-         <p>@item.ItemName</p>
-         <p>@item.Price</p>
-         <input type="submit" onclick="addToCart(this.id)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" value="ADD TO CART" class="btn btn-sm btn-success" style="width:70%" />
-     </div>
-     }-->
+        {
+        <div class="col-sm-2 border">
+            <img src="~/images/@item.ItemPictureUrl" class="img-responsive" style="width:100%" alt="Image">
+            <p>@item.ItemName</p>
+            <p>@item.Price</p>
+            <input type="submit" onclick="addToCart(this.id)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" value="ADD TO CART" class="btn btn-sm btn-success" style="width:70%" />
+        </div>
+        }-->
     </div>
 </div>
 <hr />
@@ -130,7 +156,7 @@
                 <small><a class="nav-link text-dark " href="#">Dry Fruits</a></small>
             </nav>
         </div>
-        
+
         <div class="col-sm-9">
             <p><h6 class="font-weight-light">ALL PRODUCTS &#128526</h6></p>
             <hr>
@@ -138,14 +164,24 @@
                 <div class="row text-center">
                     @foreach (var item in Model)
                     {
-                        <div class="col-sm-3 border active img-responsive">
-                            <a href="#" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
-                                <img src="~/images/@item.ItemPictureUrl" class="img-responsive" style="width:100%" alt="Image"></a>
-                            <p class="mb-0">@item.ItemName</p>
-                            <p>&#8358 @item.Price </p>
-                            <button type="submit" onclick="addToCart(this.id)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" class="btn btn-sm btn-outline-success font-weight-bold" style="width:70%"><span class="spinner-grow spinner-grow-sm"></span><small>ADD TO CART</small></button>
-                        </div>
-                    }
+        <div class="col-sm-3 border active img-responsive item">
+            <div>
+
+                <a href="#" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
+                    <img src="~/images/@item.ItemPictureUrl" class="img-responsive" style="width:100%" alt="Image">
+                </a>
+
+
+
+            </div>
+            <h5 class="mb-0">@item.ItemName</h5>
+            <p class="mb-0"></p>
+            <p class="mb-0">&#8358 @item.Price </p>
+            <button type="submit" onclick="addToCart(this.id)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" class="btn btn-sm btn-outline-success font-weight-bold btn-add-cart"><span class="spinner-grow spinner-grow-sm"></span><small><span class="fa fa-shopping-cart"></span> to cart</small></button>
+
+        </div>}
+
+
 
                 </div>
 
@@ -154,97 +190,308 @@
     </div>
     <hr>
 </div>
-
-<div id="cart-modal" class="modal fade align-content-center" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered ">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="container bg-light">
-                <div class="row justify-content-center">
-                    <div>
-                        <h5 class="text-dark">VEGEBASKET CART </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-header ">
-
-                <h5 class="modal-title text-success" id="item-name"> </h5>
-
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
             <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                             &#8358 <h5 id="item-price" class="text-dark font-weight-light"></h5>
-                        </div>
-                        <div class="col-sm-4">
-                            <input id="quantity" class="form-control col-sm-12" min="1" type="number" placeholder="Quantity" />
-                        </div>
-                        <div class="col-sm-4">
-                            &#8358 <h5 id="item-total" class="text-primary font-weight-light"></h5>
-                        </div>
-                    </div>
+                <div class="cart" id='cart'>
+                    Add items to the cart
                 </div>
+                <div id='prices'></div>
             </div>
-
-
-            <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" id="save" class="btn btn-success">Add to Cart</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info btn-block" onclick="openModal()">Continue</button>
+                
             </div>
         </div>
     </div>
 </div>
 
+@*<div id="cart-modal" class="modal fade align-content-center" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="container bg-light">
+                    <div class="row justify-content-center">
+                        <div>
+                            <h5 class="text-dark">VEGEBASKET CART </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-header ">
+
+                    <h5 class="modal-title text-success" id="item-name"> </h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                &#8358 <h5 id="item-price" class="text-dark font-weight-light"></h5>
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="quantity" class="form-control col-sm-12" min="1" type="number" placeholder="Quantity" />
+                            </div>
+                            <div class="col-sm-4">
+                                &#8358 <h5 id="item-total" class="text-primary font-weight-light"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" id="save" class="btn btn-success">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Complete order</h4>
+            </div>
+            <div class="modal-body">
+                <div class='row'>
+                    <div class='col-xs-12' id='cartContentsModal'> </div>
+                </div>
+                <div class='row'>
+                    <div class='col-xs-12' id='cartForm'>
+                        <!-- FORM -->
+                        <form>
+                            <div class="form-group">
+                                <label for="formName">Name</label>
+                                <input type="text" class="form-control col-sm-8" id="formName" placeholder="Your name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="formAddress">Address</label>
+                                <input type="text" class="form-control col-sm-8" id="formAddress" placeholder="Your address" required>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer centered">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary " id='submit'>Complete order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts
 {
-<script>
-    function addToCart(id)
-    {
-        $('#cart-modal').modal('show')
-        let price = parseInt($('#' + id).attr("data-price"));
-        let name = $('#' + id).attr("data-name");
-        $('#item-name').attr("data-id", id);
-        document.querySelector('#item-name').innerHTML = name;
-        document.querySelector('#item-price').innerHTML = 'Unit Price '+ price;
-        $('#quantity').on('change', function () {
+    <script>
+
+
+        @*function addToCart(id) {
+            $('#cart-modal').modal('show')
+            let price = parseInt($('#' + id).attr("data-price"));
+            let name = $('#' + id).attr("data-name");
+            $('#item-name').attr("data-id", id);
+            document.querySelector('#item-name').innerHTML = name;
+            document.querySelector('#item-price').innerHTML = 'Unit Price ' + price;
+            $('#quantity').on('change', function () {
+                let quantity = parseInt(document.querySelector('#quantity').value)
+                document.querySelector('#item-total').innerHTML = 'Total' + (quantity * price);
+            });
+        }
+
+        $('#save').on('click', function () {
+            let id = $('#item-name').attr("data-id");
+            let price = parseInt($('#' + id).attr("data-price"));
+            let name = $('#' + id).attr("data-name");
             let quantity = parseInt(document.querySelector('#quantity').value)
-            document.querySelector('#item-total').innerHTML ='Total' + ( quantity * price);
+            const item = { id, name, quantity, price };
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            $('#cart-modal').modal('toggle');
+            updateCartMenu();
         });
-    }
 
-    $('#save').on('click', function () {
-        let id = $('#item-name').attr("data-id");
-        let price = parseInt($('#' + id).attr("data-price"));
-        let name = $('#' + id).attr("data-name");
-        let quantity = parseInt(document.querySelector('#quantity').value)
-        const item = { id, name, quantity, price };
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(item);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        $('#cart-modal').modal('toggle');
+        function updateCartMenu() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartMenu = document.querySelector('#cart-menu');
+            let elements = ``;
+            cart.forEach(item => {
+                elements += `<a class="dropdown-item" href="#">${item.name}- ${item.price} ${item.quantity}</a>`
+            });
+            cartMenu.innerHTML = elements;
+        }
         updateCartMenu();
-    });
 
-    function updateCartMenu() {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let cartMenu = document.querySelector('#cart-menu');
-        let elements = ``;
-        cart.forEach(item => {
-            elements += `<a class="dropdown-item" href="#">${item.name}- ${item.price} ${item.quantity}</a>`
+
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });*@
+
+        var itemsInCart = 0;
+        var subTotal = 0;
+        const tax = 0.1;	// 10%
+        var totalPrice = 0;
+
+
+        window.onload = function () {
+            $('img').addClass('img-responsive');
+
+            $('.img-container').append('<button class="btn btn-success btn-add-cart"><span class="fa fa-shopping-cart"></span> to cart</button>');
+
+            $('.btn-add-cart').click((e) => {
+                //animation
+                $(e.target).animateCss('pulse');
+                // find out which item is clicked
+                // if 'span' with cart symbol is clicked, then navigate one level up to the button
+                let eventTarget;
+                if ($(e.target).is('span')) eventTarget = $(e.target).parent();
+                else eventTarget = $(e.target);
+                let itemName = eventTarget.parent().parent().find('h5')[0].textContent;
+                let itemPrice = eventTarget.parent().parent().find('p')[1].textContent;
+                addToCart(itemName, itemPrice);
+            });
+
+            $('#submit').click(() => {
+                formSubmitted();
+            });
+
+
+        }
+
+
+
+
+
+        function addToCart(name, price) {
+            let priceNumber = parseFloat(price.slice(1));
+            if (itemsInCart === 0) $('#cart').text(" ");
+            let newDiv = $('<div class="cart-item"></div>');
+            newDiv.text(name + ' ... ' + price + ' ');
+            newDiv.append('<button class="btn btn-sm btn-danger " onclick="deleteItem(this)">X</button>');
+            newDiv.append('<hr>');
+            newDiv.attr('name', name);
+            newDiv.attr('price', priceNumber);
+            $('#cart').append(newDiv);
+            newDiv.animateCss('bounceInRight');
+            itemsInCart++;
+            $('#cartItems').text(itemsInCart);
+            subTotal += priceNumber;
+            updatePrice();
+        }
+
+        function deleteItem(e) {
+            let price = $(e.parentElement).attr('price');
+            subTotal -= price;
+            $(e.parentElement).animateCss('bounceOutRight');
+            $(e.parentElement).remove();
+            itemsInCart--;
+            $('#cartItems').text(itemsInCart);
+            updatePrice();
+            cartLonelyText();
+        }
+
+        function cartLonelyText() {
+            if (itemsInCart === 0)
+                $('#cart').append('Add item to the cart');
+        }
+
+        function updatePrice() {
+            $('#prices').empty();
+            if (itemsInCart === 0) return;
+            let newDiv = $('<div></div>');
+            newDiv.append('<strong>Subtotal: N' + subTotal.toFixed(2) + '<br>');
+            newDiv.append('<strong>Tax: ' + tax * 100 + '%<br>');
+            newDiv.append('<strong>Total Price: N' + (subTotal + (subTotal * tax)).toFixed(2) + '</strong>');
+
+
+            @*newDiv.append('<button class="btn btn-info btn-block" onclick="openModal()">Continue</button>');*@
+
+            $('#prices').append(newDiv);
+            newDiv.animateCss('bounceInRight');
+        }
+
+
+        function cartToString() {
+            let itemsString = "<small><p><strong>Your order:</strong><br>";
+            let cartItems = document.querySelectorAll('.cart-item');
+            for (let item of cartItems) {
+                itemsString = itemsString + item.getAttribute('name') + " .. N" + item.getAttribute('price') + "<br>";
+            };
+            itemsString += '</p><p>Subtotal: N' + subTotal.toFixed(2) + '<br>';
+            itemsString += 'Tax: ' + tax * 100 + '%<br>'
+            itemsString += 'Total price with tax: <mark><strong>N' + (subTotal + (subTotal * tax)).toFixed(2) + '</strong></mark></p></small>';
+            return itemsString;
+        }
+
+        function openModal() {
+            $('#cartContentsModal').html(cartToString());
+            $('#myModal').modal('show');
+        }
+
+
+        function formSubmitted() {
+            if (!checkEmptyFields()) {		// if the fields arent empty
+                sweetAlert("Thanks!", "Thanks for your order! We will contact you for more information", "success");
+            } else { return; }
+            // clear cart and do other cleaning if order is OK
+            $('#myModal').modal('hide');
+            totalPrice = 0; subTotal = 0; itemsInCart = 0;
+            $('#cart').empty();
+            $('#prices').empty();
+            $('#cartItems').text(itemsInCart);
+            cartLonelyText();
+        }
+
+        function checkEmptyFields() {
+            let somethingEmpty = false;
+
+            if (!$.trim($('#formName').val()).length) {
+                $('#formName').animateCss('animated jello');
+                somethingEmpty = true;
+            }
+
+            if (!$.trim($('#formAddress').val()).length) {
+                $('#formAddress').animateCss('animated jello');
+                somethingEmpty = true;
+            }
+
+            return somethingEmpty;
+        }
+
+        $.fn.extend({
+            //		https://github.com/daneden/animate.css
+            animateCss: function (animationName) {
+                var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                this.addClass('animated ' + animationName).one(animationEnd, function () {
+                    $(this).removeClass('animated ' + animationName);
+                });
+                return this;
+            }
         });
-        cartMenu.innerHTML = elements;
-    }
-    updateCartMenu();
 
-
-    $(document).ready(function () {
-        $('[data-toggle="popover"]').popover();
-    });
-</script>
+       
+    </script>
 }
 
 
