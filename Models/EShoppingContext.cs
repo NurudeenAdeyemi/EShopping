@@ -28,6 +28,7 @@ namespace EShopping.Models
         public DbSet<Category> Categories { get; set; }
        // public DbSet<Cart> Carts { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Admin> Admins { get; set; }
     }
 }
 

@@ -111,19 +111,15 @@
     <hr>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid ">
+    <div class="row bg-success">
         <a href="#">
             <img src="~/images/special.webp" class="img-responsive img-rounded" style="width:100%" alt="Image">
         </a>
     </div>
 </div>
-<br>
 
-<div class="text-center ">
-    <p><h4 class="font-weight-light">Featured Products</h4></p>
-    <hr>
-</div>
+
 <div class="container-fluid text-center">
     <div class="row">
 
@@ -142,30 +138,30 @@
 <br />
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 border-right" style="height:300px">
+        <div class="col-sm-3 border-right bg-light" >
             <div class="">
-                <h4 class="mb-0 m-0 text-success font-weight-light">Category </h4>
+                <h4 class="mb-2 m-0 font-weight-light">Category </h4>
             </div>
 
-            <nav class="nav flex-column mb-0 m-0 text-dark">
-                <small><a class="nav-link active mb-0 text-dark " href="#">Fresh Fruits</a></small>
-                <small><a class="nav-link mb-0 text-dark " href="#">Fresh Veggies</a></small>
-                <small><a class="nav-link mb-0 text-dark " href="#">Spices, Herbs and Seasonings</a></small>
-                <small><a class="nav-link mb-0 text-dark " href="#">Organic Fruits and Vegetables</a></small>
-                <small><a class="nav-link mb-0 text-dark " href="#">Exotic Fruits and Veggies</a></small>
-                <small><a class="nav-link text-dark " href="#">Dry Fruits</a></small>
+            <nav class="nav flex-column mb-2 m-0 text-success ">
+                <h6><a class="active mb-2  text-success " asp-action="FreshFruits" asp-controller="Home">Fresh Fruits</a></h6>
+                <h6><a class="mb-2 text-success " asp-action="FreshVeggies" asp-controller="Home">Fresh Veggies</a></h6>
+                <h6><a class="mb-2  text-success " asp-action="Spices" asp-controller="Home">Spices, Herbs and Seasonings</a></h6>
+                <h6><a class=" mb-2  text-success " asp-action="Organic" asp-controller="Home">Organic Fruits and Vegetables</a></h6>
+                <h6><a class="mb-2  text-success " asp-action="Exotic" asp-controller="Home">Exotic Fruits and Veggies</a></h6>
+                <h6><a class="text-success " asp-action="DryFruits" asp-controller="Home">Dry Fruits</a></h6>
             </nav>
         </div>
 
         <div class="col-sm-9">
-            <p><h6 class="font-weight-light">ALL PRODUCTS &#128526</h6></p>
+            <p><h6 class="font-weight-bolder">ALL PRODUCTS &#128526</h6></p>
             <hr>
             <div class="container">
                 <div class="row text-center">
                     @foreach (var item in Model)
                     {
-        <div class="col-sm-3 border active img-responsive">
-            <a href="#" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
+        <div class="col-sm-3 border active img-responsive  mb-2">
+            <a asp-action="Details" asp-controller="Item" asp-route-id="@item.ItemId" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
                 <img src="~/images/@item.ItemPictureUrl" class="img-responsive" style="width:100%" alt="Image">
             </a>
             <p class="mb-0">@item.ItemName</p>
@@ -296,141 +292,7 @@
 @section Scripts
 {
     <script>
-        const cartModal = $('#cart-modal');
-        const cartMenu = $('#cart-menu');
-        const totalQuantityLabel = $('#total-quantity-label');
-        const modalItemNameLabel = $('#item-name');
-        const modalItemPriceLabel = $("#item-price");
-        const modalItemQuantityInput = $("#quantity");
-        const modalItemTotalLabel = $("#item-total");
-
-        function addToCart(itemHTMLElement) {
-            const itemElement = $(itemHTMLElement);
-            const price = parseInt(itemElement.data("price"));
-            const name = itemElement.data("name");
-            const itemId = itemElement.data("id");
-
-            modalItemNameLabel.data("elementId", itemHTMLElement.id);
-            modalItemNameLabel.html(name);
-            modalItemPriceLabel.html(`Unit Price: ${price}`);
-
-            function onQuantityChanged() {
-                let quantity = parseInt(this.value);
-                if (isNaN(quantity)) {
-                    quantity = 0;
-                }
-                modalItemTotalLabel.html(`Total: : ${quantity * price}`);
-            }
-
-            modalItemQuantityInput.on('keyup', onQuantityChanged);
-            modalItemQuantityInput.on('change', onQuantityChanged);
-
-            setInitialQuantityAndTotalPrice(itemId, price);
-            cartModal.modal('show')
-        }
-
-        function setInitialQuantityAndTotalPrice(itemId) {
-            const cart = getCart();
-            const i = indexOfItemInCart(cart, itemId);
-            if (i >= 0) {
-                modalItemQuantityInput.val(cart[i].quantity + 1);
-            }
-            else {
-                modalItemQuantityInput.val(1);
-            }
-            modalItemQuantityInput.trigger("change");
-        }
-
-        function indexOfItemInCart(cart, itemId) {
-            for (const i in cart) {
-                const cartItem = cart[i];
-
-                if (cartItem.itemId === itemId) {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
-        function updateOrAddToCart(cart, item) {
-            var i = indexOfItemInCart(cart, item.itemId);
-            if (i >= 0) {
-                cart[i].quantity = item.quantity;
-            }
-            else {
-                cart.push(item);
-            }
-        }
-
-        function getCart() {
-            return JSON.parse(localStorage.getItem('cart')) || [];
-        }
-
-        $('#save').on('click', function () {
-            const elementId = modalItemNameLabel.data("elementId");
-            const itemElement = $(`#${elementId}`);
-
-            const price = parseInt(itemElement.data("price"));
-            const name = itemElement.data("name");
-            const quantity = parseInt(modalItemQuantityInput.val());
-            const itemId = itemElement.data("id");
-
-            const item = { itemId, name, quantity, price };
-            const cart = getCart();
-            updateOrAddToCart(cart, item);
-            updateCart(cart);
-            updateCartMenu();
-            cartModal.modal('toggle');
-        });
-
-        function updateCart(cart) {
-            localStorage.setItem('cart', JSON.stringify(cart));
-        }
-
-        function updateCartMenu() {
-            const cart = getCart();
-            let elements = '';
-            let totalPrice = 0;
-            cart.forEach(item => {
-                itemTotalPrice = item.quantity * item.price;
-                totalPrice += itemTotalPrice;
-                elements += `<a class="dropdown-item" href="#">${item.name} - ${item.price} ${item.quantity} - ${itemTotalPrice}</a>`
-            });
-            elements += `<a class="dropdown-item" href="#">${totalPrice}</a>`
-            cartMenu.html(elements);
-            var totalQuantity = getTotalQuantity();
-            totalQuantityLabel.html(totalQuantity);
-        }
-        updateCartMenu();
-
-        function getTotalQuantity() {
-            const cart = getCart();
-            let sum = 0;
-            cart.forEach(item => {
-                sum += item.quantity;
-            });
-            return sum;
-        }
-
-        function clearCart() {
-            const cart = [];
-            updateCart(cart);
-        }
-
-        function deleteItemFromCart(itemId, cart) {
-            const i = indexOfItemInCart(cart, itemId);
-            if (i > -1) {
-                array.splice(i, 1);
-            }
-            updateCart(cart);
-            updateCartMenu();
-        }
-
-
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
-        });
+    
 
             @*var itemsInCart = 0;
             var subTotal = 0;

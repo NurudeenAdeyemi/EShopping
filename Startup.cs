@@ -41,11 +41,13 @@ namespace EShopping
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IOrderItemService, OrderItemService>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IAdminService, AdminService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(config =>
                 {
-                    config.LoginPath = "/user/login";
+                    config.LoginPath = "/admin/login";
                     config.Cookie.Name = "EShopping";
                 });
 

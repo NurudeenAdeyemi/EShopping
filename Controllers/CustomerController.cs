@@ -15,6 +15,7 @@ using MySql.Data.MySqlClient;
 
 namespace EShopping.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class CustomerController : Controller
     {
        
@@ -46,12 +47,14 @@ namespace EShopping.Controllers
         }
         
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Customer customer)
         {
@@ -60,7 +63,7 @@ namespace EShopping.Controllers
                 _customerService.Create(customer);
                 
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", "Customer");
         }
 
         [HttpGet]
@@ -130,10 +133,11 @@ namespace EShopping.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Logout()
         {
 
-            HttpContext.SignOutAsync();
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
 
@@ -161,7 +165,8 @@ namespace EShopping.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, customer.LastName),
-                    new Claim(ClaimTypes.Email, customer.Email)
+                    new Claim(ClaimTypes.Email, customer.Email),
+                    new Claim(ClaimTypes.Role, "Customer"),
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var authenticationProperties = new AuthenticationProperties();

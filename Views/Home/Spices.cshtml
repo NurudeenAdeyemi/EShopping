@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Item>
+
+<div class="">
+    <p><h6 class="font-weight-bolder">Spices</h6></p>
+    <hr>
+    <div class="container">
+        <div class="row text-center">
+            @foreach (var item in Model)
+            {
+<div class="col-sm-3 border active img-responsive  mb-2">
+    <a asp-action="Details" asp-controller="Item" asp-route-id="@item.ItemId" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
+        <img src="~/images/@item.ItemPictureUrl" class="img-responsive" style="width:100%" alt="Image">
+    </a>
+    <p class="mb-0">@item.ItemName</p>
+    <p>&#8358 @item.Price </p>
+    <button type="submit" onclick="addToCart(this)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" class="btn btn-sm btn-outline-success font-weight-bold" style="width:70%"><span class="spinner-grow spinner-grow-sm"></span><small>ADD TO CART</small></button>
+</div>            }
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id="cart-modal" class="modal fade align-content-center" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="container bg-light">
+                <div class="row justify-content-center">
+                    <div>
+                        <h5 class="text-dark">VEGEBASKET CART </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-header ">
+
+                <h5 class="modal-title text-success" id="item-name"> </h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            &#8358 <h5 id="item-price" class="text-dark font-weight-light"></h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <input id="quantity" class="form-control col-sm-12" min="1" type="number" placeholder="Quantity" />
+                        </div>
+                        <div class="col-sm-4">
+                            &#8358 <h5 id="item-total" class="text-primary font-weight-light"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="save" class="btn btn-success">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>

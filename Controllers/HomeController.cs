@@ -60,5 +60,47 @@ namespace EShopping.Controllers
             return View(item);
         }
 
+        public IActionResult ViewCart()
+        {
+            return View();
+        }
+
+        public IActionResult FreshFruits()
+        {
+            var items = _itemService.GetAll();
+            return View(items);
+        }
+
+        public IActionResult FreshVeggies()
+        {
+            var items = _itemService.GetAll();
+            return View(items);
+        }
+
+        public IActionResult DryFruits()
+        {
+            var items = _itemService.GetAll();
+            return View(items);
+        }
+
+        public IActionResult Exotic()
+        {
+            var items = _itemService.GetAll();
+            return View(items);
+        }
+
+        public IActionResult Organic()
+        {
+            var items = _itemService.GetAll();
+            return View(items);
+        }
+
+        public IActionResult Spices()
+        {
+            var items = _itemService.GetAll();
+            return View(items);
+        }
+
+      
     }
 }

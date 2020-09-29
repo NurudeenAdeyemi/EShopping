@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using EShopping.Models;
 using EShopping.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EShopping.Controllers
 {
+    
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;

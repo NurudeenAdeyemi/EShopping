@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using EShopping.Models;
 using EShopping.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EShopping.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
         private readonly IItemService _itemService;
