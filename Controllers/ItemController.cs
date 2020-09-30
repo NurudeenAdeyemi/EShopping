@@ -28,6 +28,7 @@ namespace EShopping.Controllers
             return View(_itemService.GetAll());
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int? id)
         {
             if (id == null)

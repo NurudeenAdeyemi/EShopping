@@ -52,9 +52,10 @@ namespace EShopping.Controllers
             if (ModelState.IsValid)
             {
                 _orderService.Create(order);
-                return RedirectToAction(nameof(Index));
+               
             }
-            return View(order);
+            return RedirectToAction("Confirmation", "Order");
+            
         }
 
         [HttpGet]
@@ -114,6 +115,16 @@ namespace EShopping.Controllers
         {
             _orderService.Delete(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
+
+        public IActionResult Checkout()
+        {
+            return View();
         }
     }
 }

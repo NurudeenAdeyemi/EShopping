@@ -34,6 +34,21 @@
                 background: red;
                 color: white;
             }
+        .checked {
+            color: orange;
+        }
+
+        .zoom {
+            
+           
+            transition: transform .2s; /* Animation */
+          
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
     </style>
 
 }
@@ -52,46 +67,61 @@
                     <li data-target="#myCarousel" data-slide-to="2"></li>
                     <li data-target="#myCarousel" data-slide-to="4"></li>
                     <li data-target="#myCarousel" data-slide-to="5"></li>
+                    <li data-target="#myCarousel" data-slide-to="6"></li>
+                    <li data-target="#myCarousel" data-slide-to="7"></li>
                 </ol>
 
                 <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox" style="height:300px">
+                <div class="carousel-inner" role="listbox" style="height:250px">
                     <div class="carousel-item active">
-                        <img src="~/images/test_Moment.jpg" alt="Image">
+                        <img src="~/images/f1.webp" alt="Image">
                         <div class="carousel-caption">
-                            <h3>Flyway</h3>
-                            <p>Flyway</p>
+                            <h3>VegeBasket</h3>
+                            <p>Healthy living</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item ">
+                        <img src="~/images/L1-NNP3904-1200x300-12thaug.webp" alt="Image">
+                        <div class="carousel-caption">
+
                         </div>
                     </div>
 
                     <div class="carousel-item">
-                        <img src="~/images/test_Moment.jpg" alt="Image">
+                        <img src="~/images/L2-NNP4738-1200x300-8sep20.webp" alt="Image">
                         <div class="carousel-caption">
-                            <h3>Flyway</h3>
-                            <p>Flyway</p>
+                            <h3>VegeBasket</h3>
+                            <p>Healthy living</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/L2-NNP4774-1200x300-8sep20.webp" alt="Image">
+                        <div class="carousel-caption">
+                            <h3>VegeBasket</h3>
+                            <p>Healthy living</p>
                         </div>
                     </div>
 
                     <div class="carousel-item">
-                        <img src="~/images/10.jpg" alt="Image">
+                        <img src="~/images/L2-NNP4783-1200x300-8sep20.webp" alt="Image">
                         <div class="carousel-caption">
-                            <h3>Flyway</h3>
-                            <p>Flyway</p>
+                            <h3>VegeBasket</h3>
+                            <p>Healthy living</p>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="~/images/OIP (1).jpg" alt="Image">
+                    <div class="carousel-item ">
+                        <img src="~/images/n2.jpg" alt="Image">
                         <div class="carousel-caption">
-                            <h3>Flyway</h3>
-                            <p>Flyway</p>
+                            <h3>VegeBasket</h3>
+                            <p>Healthy living</p>
                         </div>
                     </div>
-
-                    <div class="carousel-item">
-                        <img src="~/images/OIP.jpg" alt="Image">
+                    <div class="carousel-item ">
+                        <img src="~/images/n3.jpg" alt="Image">
                         <div class="carousel-caption">
-                            <h3>Flyway</h3>
-                            <p>Flyway</p>
+                            <h3>VegeBasket</h3>
+                            <p>Healthy living</p>
                         </div>
                     </div>
                 </div>
@@ -113,7 +143,7 @@
 
 <div class="container-fluid ">
     <div class="row bg-success">
-        <a href="#">
+        <a asp-action="FreshFruits" asp-controller="Home">
             <img src="~/images/special.webp" class="img-responsive img-rounded" style="width:100%" alt="Image">
         </a>
     </div>
@@ -150,6 +180,7 @@
                 <h6><a class=" mb-2  text-success " asp-action="Organic" asp-controller="Home">Organic Fruits and Vegetables</a></h6>
                 <h6><a class="mb-2  text-success " asp-action="Exotic" asp-controller="Home">Exotic Fruits and Veggies</a></h6>
                 <h6><a class="text-success " asp-action="DryFruits" asp-controller="Home">Dry Fruits</a></h6>
+              
             </nav>
         </div>
 
@@ -160,14 +191,15 @@
                 <div class="row text-center">
                     @foreach (var item in Model)
                     {
-        <div class="col-sm-3 border active img-responsive  mb-2">
-            <a asp-action="Details" asp-controller="Item" asp-route-id="@item.ItemId" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
-                <img src="~/images/@item.ItemPictureUrl" class="img-responsive" style="width:100%" alt="Image">
-            </a>
-            <p class="mb-0">@item.ItemName</p>
-            <p>&#8358 @item.Price </p>
-            <button type="submit" onclick="addToCart(this)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" class="btn btn-sm btn-outline-success font-weight-bold" style="width:70%"><span class="spinner-grow spinner-grow-sm"></span><small>ADD TO CART</small></button>
-        </div>}
+                    <div class="col-sm-3 border active img-responsive  mb-2">
+                        <a  asp-action="Details" asp-controller="Item" asp-route-id="@item.ItemId" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
+                            <img src="~/images/@item.ItemPictureUrl" class="img-responsive zoom" style="width:100%" alt="Image">
+                        </a>
+                        <p class="mb-0">@item.ItemName</p>
+                        <p>&#8358 @item.Price </p>
+                        
+                        <button type="submit" onclick="addToCart(this)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" class="btn btn-sm btn-outline-success font-weight-bold" style="width:70%"><span class="spinner-grow spinner-grow-sm"></span><small>ADD TO CART</small></button>
+                    </div>}
 
                 </div>
 

@@ -415,3 +415,5 @@ C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Hom
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Home\FreshVeggies.cshtml.g.cs
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Home\Organic.cshtml.g.cs
 C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Home\Spices.cshtml.g.cs
+C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Order\Confirmation.cshtml.g.cs
+C:\Users\nurudeen\source\repos\EShopping\obj\Debug\netcoreapp3.1\Razor\Views\Order\Checkout.cshtml.g.cs

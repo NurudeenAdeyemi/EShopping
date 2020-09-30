@@ -40,6 +40,8 @@
                 background: red;
                 color: white;
             }
+
+
     </style>
 
 
@@ -49,7 +51,11 @@
     <header>
         <nav class="navbar sticky-top navbar-expand navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 sticky-top">
             <div class="container">
-                <a class="navbar-brand text-success" asp-area="" asp-controller="Home" asp-action="Index">Vegebasket </a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/vege.png" alt="Logo" style="width:120px;height:60px">
+                </a>
+                
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -65,18 +71,19 @@
                 </div>
 
 
-
-                <form class="form-inline" method="GET" asp-action="Search" asp-controller="Home">
-                    <div>
-                        <input class="form-control  mr-0" type="search" name="ItemName" placeholder="Search for products..." aria-label="Search">
-                        <button class="btn btn-success text-white ml-0" type="submit">Search</button>
-                    </div>
-                </form>
+                <div class="align-content-center">
+                    <form class="form-inline  mr-3" method="GET" asp-action="Search" asp-controller="Home">
+                        <div>
+                            <input class="form-control  mr-0" type="search" name="ItemName" placeholder="Search for products..." aria-label="Search">
+                            <button class="btn btn-success text-white ml-0" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
                 <div class="float-right">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown mr-3">
                             <a class="nav-link dropdown-toggle text-success notification" href="#" id="navbardrop" data-toggle="dropdown" data-spy="affix" data-offset-top="10">
-                                <i class="fa fa-fw fa-shopping-cart"></i>Cart<span class="badge" id='total-quantity-label'>0</span>
+                                <i class="fa fa-stack-2x fa-shopping-basket"></i><span class="badge" id='total-quantity-label'>0</span>
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -85,23 +92,23 @@
 
                             @*<div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
 
-            </div>*@
+                    </div>*@
 
                         </li>
                         @if (User != null && User.Identity.IsAuthenticated)
-                           
+
                         {
-                            
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="#">@User.Identity.Name</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-success" asp-area="" asp-controller="Customer" asp-action="Logout"><i class="fas fa-user"></i> Logout</a>
-                        </li>
+
+                            <li class="nav-item  mr-3">
+                                <a class="nav-link text-success" href="#">@User.Identity.Name</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-success  mr-3" asp-area="" asp-controller="Customer" asp-action="Logout"><i class="fas fa-user"></i> Logout</a>
+                            </li>
                         }
                         else
                         {
-                        <a class="nav-link text-success" asp-area="" asp-controller="Customer" asp-action="Login"><i class="fas fa-user"></i>Login</a>
+                            <a class="nav-link text-success  mr-3" asp-area="" asp-controller="Customer" asp-action="Login"><i class="fas fa-user"></i>Login</a>
                         }
 
 
@@ -113,24 +120,24 @@
 
 
                         @*<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-success notification" href="#" id="navbardrop" data-toggle="dropdown" data-spy="affix" data-offset-top="10">
-                <i class="fas fa-shopping-cart shopping-cart-icon"></i>Cart<span class="badge" id='cartItems'>0</span>
-            </a>
-            <div class="dropdown-menu" id='prices'></div>
+                    <a class="nav-link dropdown-toggle text-success notification" href="#" id="navbardrop" data-toggle="dropdown" data-spy="affix" data-offset-top="10">
+                        <i class="fas fa-shopping-cart shopping-cart-icon"></i>Cart<span class="badge" id='cartItems'>0</span>
+                    </a>
+                    <div class="dropdown-menu" id='prices'></div>
 
 
-        </li>
-        <li class="nav-item dropdown ">
-            <a class="nav-link dropdown-toggle text-success" href="#" id="navbardrop" data-toggle="dropdown">
-                Items
-            </a>
+                </li>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle text-success" href="#" id="navbardrop" data-toggle="dropdown">
+                        Items
+                    </a>
 
-            <div class="cart col-sm-6 dropdown-menu text-sm-center font-weight-lighter " id='cart'>
-                Add fresh items to the cart
-            </div>
+                    <div class="cart col-sm-6 dropdown-menu text-sm-center font-weight-lighter " id='cart'>
+                        Add fresh items to the cart
+                    </div>
 
 
-         </li>*@
+                 </li>*@
 
 
                     </ul>
@@ -152,17 +159,17 @@
                 <p class="mb-0 text-success"><h6 class="text-success">Vegebasket</h6></p>
                 <hr>
 
-                <a class="text-dark text-underline no-wrap mb-0" target="_blank" asp-area="" asp-controller="Home" asp-action="AboutUs"><small>About us</small> </a><p class="mb-0"></p>
-                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Latest news</small></a><p class="mb-0"></p>
-                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Careers</small></a><p class="mb-0"></p>
-                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"> <small>Our sponsorships</small></a><p class="mb-0"></p>
-                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Ethics and Compliance</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" asp-area="" asp-controller="Home" asp-action="AboutUs"><small>About us</small> </a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" href="#"><small>Latest news</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" href="#"><small>Careers</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0"  href="#"> <small>Our sponsorships</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" href="#"><small>Ethics and Compliance</small></a><p class="mb-0"></p>
             </div>
 
             <div class="col-sm-3 text-center mb-0">
                 <p class="mb-0 text-success"><h6 class="text-success">Help</h6></p>
                 <hr>
-                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>FAQs </small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0"  href="#"><small>FAQs </small></a><p class="mb-0"></p>
                 <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Contact us</small></a><p class="mb-0"></p>
 
             </div>
