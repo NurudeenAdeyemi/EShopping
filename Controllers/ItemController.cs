@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EShopping.Controllers
 {
@@ -17,10 +18,13 @@ namespace EShopping.Controllers
     {
         private readonly IItemService _itemService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ItemController(IItemService itemService, IWebHostEnvironment webHostEnvironmrnt)
+        private readonly ICategoryService _categoryService;
+
+        public ItemController(IItemService itemService, IWebHostEnvironment webHostEnvironmrnt, ICategoryService categoryService)
         {
             _itemService = itemService;
             _webHostEnvironment = webHostEnvironmrnt;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
@@ -48,6 +52,15 @@ namespace EShopping.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            List<Category> categories = _categoryService.GetAll();
+            List<SelectListItem> listAItems = new List<SelectListItem>();
+            foreach (Category category in categories)
+            {
+                SelectListItem item = new SelectListItem(category.CategoryName, category.ID.ToString());
+                listAItems.Add(item);
+            }
+
+            ViewBag.Categories = listAItems;
             return View();
         }
 
