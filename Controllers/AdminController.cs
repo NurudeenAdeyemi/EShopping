@@ -155,7 +155,9 @@ namespace EShopping.Controllers
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, admin.LastName),
+                    new Claim(ClaimTypes.Name, $"{admin.FirstName}"),
+                    new Claim(ClaimTypes.GivenName, $"{admin.FirstName} {admin.LastName}"),
+                    new Claim(ClaimTypes.NameIdentifier, admin.AdminId.ToString()),
                     new Claim(ClaimTypes.Email, admin.Email),
                     new Claim(ClaimTypes.Role, "Administrator"),
                 };

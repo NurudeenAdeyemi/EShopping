@@ -19,5 +19,6 @@ namespace EShopping.Service
         public List<Order> GetAll();
 
         public bool Exists(int id);
+        List<OrderItem> Checkout(int customerId, IEnumerable<CheckoutOrder> orderItems, string deliveryAddress);
     }
 }

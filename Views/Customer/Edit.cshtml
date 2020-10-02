@@ -10,8 +10,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <input type="hidden" name="id" value="@Model.CustomerId" />
+        <form asp-action="Edit" asp-route-id="@Model.CustomerId">
+            <input type="hidden" name="CustomerId" value="@Model.CustomerId" />
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />

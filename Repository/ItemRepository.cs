@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace EShopping.Repository
 {
@@ -53,14 +55,20 @@ namespace EShopping.Repository
 
         }
 
+        public List<Item> GetAll(IEnumerable<int> itemIds)
+        {
+            return _dbContext.Items.Where(item => itemIds.Contains(item.ItemId)).ToList();
+
+        }
+
         public bool Exists(int id)
         {
             return _dbContext.Items.Any(e => e.ItemId == id);
         }
 
-        public Item Search(int id)
+        public IList<Item> Search(string searchText)
         {
-            return _dbContext.Items.Find(id);
+            return _dbContext.Items.Where(item => EF.Functions.Like(item.ItemName, $"%{searchText}%")).ToList();
         }
     }
 }

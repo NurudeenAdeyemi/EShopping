@@ -56,14 +56,20 @@ namespace EShopping.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Customer customer)
+        public IActionResult Create(Customer customer, bool isCheckout = false )
         {
             if (ModelState.IsValid)
             {
                 _customerService.Create(customer);
-                
+                return Login(customer.Username, customer.Password, isCheckout);
+
             }
-            return RedirectToAction("Details", "Customer");
+            else
+            {
+                ViewBag.Message = "Invalid Details";
+                return isCheckout ? RedirectToAction("Checkout", "Order") : RedirectToAction("Index", "Home");
+            }
+
         }
 
         [HttpGet]
@@ -151,20 +157,26 @@ namespace EShopping.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login(string username, string password)
+        public IActionResult Login(string username, string password, bool isCheckout = false)
         {
 
             var customer = _customerService.Login(username, password);
             if (customer == null)
             {
                 ViewBag.Message = "Invalid Username/Password";
+                if (isCheckout)
+                {
+                    return RedirectToAction("Checkout", "Order");
+                }
                 return View();
             }
             else
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, customer.LastName),
+                    new Claim(ClaimTypes.Name, $"{customer.FirstName}"),
+                    new Claim(ClaimTypes.GivenName, $"{customer.FirstName} {customer.LastName}"),
+                    new Claim(ClaimTypes.NameIdentifier, customer.CustomerId.ToString()),
                     new Claim(ClaimTypes.Email, customer.Email),
                     new Claim(ClaimTypes.Role, "Customer"),
                 };
@@ -172,7 +184,7 @@ namespace EShopping.Controllers
                 var authenticationProperties = new AuthenticationProperties();
                 var principal = new ClaimsPrincipal(claimsIdentity);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authenticationProperties);
-                return RedirectToAction("Index", "Home");
+                return isCheckout? RedirectToAction("Checkout", "Order") : RedirectToAction("Index", "Home");
             }
 
         }

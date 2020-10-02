@@ -46,10 +46,10 @@ namespace EShopping.Service
             return itemRepository.Exists(id);
         }
 
-        public Item Search(int id)
+        public IList<Item> Search(string  searchText)
         {
 
-            return itemRepository.Search(id);
+            return itemRepository.Search(searchText);
         }
 
         

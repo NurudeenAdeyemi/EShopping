@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using EShopping.Models;
 using EShopping.Service;
@@ -125,6 +126,15 @@ namespace EShopping.Controllers
         public IActionResult Checkout()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Checkout(IEnumerable<CheckoutOrder> orders, string deliveryAddress)
+        {
+            var customerId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var response = _orderService.Checkout(customerId, orders, deliveryAddress);
+            return View("Confirmation", response);
         }
     }
 }
